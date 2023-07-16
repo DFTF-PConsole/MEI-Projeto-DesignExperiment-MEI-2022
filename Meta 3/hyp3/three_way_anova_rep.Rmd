@@ -1,0 +1,121 @@
+---
+title: "Hyp 2: Three-Way ANOVA Repeated Measures"
+output: html_notebook
+---
+
+```{r}
+# Load libraries
+library(tidyverse)
+library(ggpubr)
+library(rstatix)
+library(nortest)
+
+# Needed by Afex
+library(afex)
+library(emmeans)
+library(performance)
+
+# Multiple Imputation
+library(mice)
+library(mitml)
+
+# Aligned Rank Transformation ANOVA
+library(ARTool)
+
+options(max.print = .Machine$integer.max)
+
+w <- 620
+h <- 360
+```
+
+```{r}
+# Set Working Directory
+setwd("/home/jekyll/MEI/2_Ano/MEI/Pratica/MEI-Trabalhos-2022/Trabalho/hyp_2/three_way_anova_rm")
+
+# Read data
+df <- read.csv("new_results_paired.csv")
+
+# Data Pre-processing
+data <- df[df$probability>0.1, ]
+data$seed <- factor(data$seed)
+data$vertices <- factor(data$vertices)
+data$probability <- factor(data$probability)
+data$algorithm <- factor(data$algorithm)
+```
+
+```{r}
+# Three-way ANOVA Repeated Measures using aov_car
+aov_rm <- aov_car(time ~ vertices*probability*algorithm + Error(seed/algorithm), data=data, fun_aggregate=mean, factorize=TRUE, na.rm=TRUE, include_aov=TRUE)#, anova_table=list(correction = "none", es = "none"))
+```
+
+```{r}
+# Summary of the Three-way ANOVA Repeated Measures
+summary(aov_rm)
+```
+
+```{r}
+# Verifies Residuals' Normality
+r <- residuals(aov_rm, append = T)
+png("residuals.png", width=w, height=h)
+qqnorm(r$.residuals)
+qqline(r$.residuals)
+invisible(dev.off())
+```
+
+```{r}
+# Shapiro-Wilk Normality Test
+#shapiro.test(r$.residuals)
+```
+
+```{r}
+# Anderson-Darling Normality Test
+ad.test(r$.residuals)
+```
+
+```{r}
+# Verifies Variance's Sphericity
+check_sphericity(aov_rm)
+```
+
+```{r}
+# Transform the data
+m.art <- art(time ~ vertices*probability*algorithm + Error(seed/algorithm), data=data)
+```
+
+```{r}
+# Verify Appropriateness of ART
+summary(m.art)
+```
+
+```{r}
+# Aligned Rank Transform ANOVA
+anova(m.art)
+```
+
+```{r}
+art.con(m.art, "vertices")
+```
+
+```{r}
+art.con(m.art, "probability")
+```
+
+```{r}
+art.con(m.art, "algorithm")
+```
+
+```{r}
+art.con(m.art, "vertices:probability", interaction=TRUE)
+```
+
+```{r}
+art.con(m.art, "vertices:algorithm", interaction=TRUE)
+```
+
+```{r}
+art.con(m.art, "probability:algorithm", interaction=TRUE)
+```
+
+```{r}
+art.con(m.art, "vertices:probability:algorithm", interaction=TRUE)
+```

@@ -1,0 +1,33 @@
+
+Call:
+lm(formula = time ~ poly(vertices, 2, raw = TRUE) * poly(arcs, 
+    2, raw = TRUE), data = df)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-0.15507 -0.01151 -0.00087  0.00500  0.42439 
+
+Coefficients:
+                                                            Estimate Std. Error t value Pr(>|t|)    
+(Intercept)                                                4.461e-03  3.742e-03   1.192  0.23336    
+poly(vertices, 2, raw = TRUE)1                            -5.840e-05  2.309e-05  -2.530  0.01145 *  
+poly(vertices, 2, raw = TRUE)2                             7.570e-08  2.430e-08   3.115  0.00185 ** 
+poly(arcs, 2, raw = TRUE)1                                 5.823e-07  3.107e-07   1.874  0.06098 .  
+poly(arcs, 2, raw = TRUE)2                                -2.623e-11  3.909e-12  -6.710 2.22e-11 ***
+poly(vertices, 2, raw = TRUE)1:poly(arcs, 2, raw = TRUE)1  2.198e-09  7.850e-10   2.800  0.00514 ** 
+poly(vertices, 2, raw = TRUE)2:poly(arcs, 2, raw = TRUE)1 -9.562e-13  5.560e-13  -1.720  0.08556 .  
+poly(vertices, 2, raw = TRUE)1:poly(arcs, 2, raw = TRUE)2  4.010e-14  7.998e-15   5.014 5.56e-07 ***
+poly(vertices, 2, raw = TRUE)2:poly(arcs, 2, raw = TRUE)2 -1.803e-17  4.186e-18  -4.306 1.70e-05 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 0.04174 on 3981 degrees of freedom
+Multiple R-squared:  0.6841,	Adjusted R-squared:  0.6835 
+F-statistic:  1078 on 8 and 3981 DF,  p-value: < 2.2e-16
+
+
+	Shapiro-Wilk normality test
+
+data:  residuals(aov.out)
+W = 0.81978, p-value < 2.2e-16
+

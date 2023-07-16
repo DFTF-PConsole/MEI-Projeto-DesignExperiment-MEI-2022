@@ -1,0 +1,21 @@
+
+Call:
+lm(formula = sqrt(time) ~ vertices * sqrt(arcs), data = df)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-0.22254 -0.03636 -0.00048  0.02368  0.33528 
+
+Coefficients:
+                      Estimate Std. Error t value Pr(>|t|)    
+(Intercept)         -4.225e-02  3.832e-03 -11.028   <2e-16 ***
+vertices             2.989e-04  8.284e-06  36.088   <2e-16 ***
+sqrt(arcs)           3.232e-04  2.780e-05  11.625   <2e-16 ***
+vertices:sqrt(arcs)  4.351e-08  3.149e-08   1.382    0.167    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 0.06423 on 3986 degrees of freedom
+Multiple R-squared:    0.8,	Adjusted R-squared:  0.7998 
+F-statistic:  5315 on 3 and 3986 DF,  p-value: < 2.2e-16
+

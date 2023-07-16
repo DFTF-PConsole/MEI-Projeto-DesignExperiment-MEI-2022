@@ -1,0 +1,31 @@
+
+Call:
+lm(formula = time ~ poly(vertices, 2, raw = TRUE) * poly(arcs, 
+    1, raw = TRUE), data = df)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-0.15247 -0.01695 -0.00115  0.00632  0.38302 
+
+Coefficients:
+                                                           Estimate Std. Error t value
+(Intercept)                                               1.079e-02  3.612e-03   2.987
+poly(vertices, 2, raw = TRUE)1                           -1.183e-04  1.962e-05  -6.033
+poly(vertices, 2, raw = TRUE)2                            2.561e-07  1.956e-08  13.090
+poly(arcs, 1, raw = TRUE)                                 6.540e-07  2.160e-07   3.028
+poly(vertices, 2, raw = TRUE)1:poly(arcs, 1, raw = TRUE) -6.498e-10  5.079e-10  -1.279
+poly(vertices, 2, raw = TRUE)2:poly(arcs, 1, raw = TRUE)  1.872e-13  3.026e-13   0.619
+                                                         Pr(>|t|)    
+(Intercept)                                               0.00284 ** 
+poly(vertices, 2, raw = TRUE)1                           1.76e-09 ***
+poly(vertices, 2, raw = TRUE)2                            < 2e-16 ***
+poly(arcs, 1, raw = TRUE)                                 0.00247 ** 
+poly(vertices, 2, raw = TRUE)1:poly(arcs, 1, raw = TRUE)  0.20089    
+poly(vertices, 2, raw = TRUE)2:poly(arcs, 1, raw = TRUE)  0.53613    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 0.04704 on 3984 degrees of freedom
+Multiple R-squared:  0.6233,	Adjusted R-squared:  0.6228 
+F-statistic:  1318 on 5 and 3984 DF,  p-value: < 2.2e-16
+

@@ -1,0 +1,35 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r}
+# Transformed Linear Regression with Interactions
+
+# Set Working Directory
+setwd("~/MEI/2_Ano/MEI/Pratica/MEI-Trabalhos-2022/r")
+
+# Libraries
+library(ggplot2, quietly=TRUE)
+library(stringr, quietly=TRUE)
+library(viridis, quietly=TRUE)
+
+data <- read.csv("../results2.csv")
+```
+
+```{r}
+df <- data[data$algorithm=="Dinic",]
+fit <- lm(sqrt(time) ~ vertices:sqrt(arcs), data=df)
+print(summary(fit))
+```
+```{r}
+df <- data[data$algorithm=="EK",]
+fit <- lm(sqrt(time) ~ arcs:sqrt(vertices), data=df)
+print(summary(fit))
+```
+
+```{r}
+df <- data[data$algorithm=="MPM",]
+fit <- lm(time^(1/3) ~ vertices, data=df)
+print(summary(fit))
+```
